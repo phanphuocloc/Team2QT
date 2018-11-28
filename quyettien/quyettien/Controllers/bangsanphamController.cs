@@ -48,17 +48,17 @@ namespace quyettien.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,MaSP,TenSP,Loai_id,GiaBan,GiaGoc,GiaGop,SoLuongTon")] BangSanPham bangsanpham)
+        public ActionResult Create( BangSanPham model)
         {
             if (ModelState.IsValid)
             {
-                db.BangSanPhams.Add(bangsanpham);
+                db.BangSanPhams.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Loai_id = new SelectList(db.LoaiSanPhams, "id", "TenLoai", bangsanpham.Loai_id);
-            return View(bangsanpham);
+            ViewBag.Loai_id = new SelectList(db.LoaiSanPhams, "id", "TenLoai", model.Loai_id);
+            return View(model);
         }
 
         // GET: /bangsanpham/Edit/5
